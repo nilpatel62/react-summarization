@@ -15,7 +15,7 @@ const App = () => {
     setIsLoading(true); // Set loading state to true
 
     // Make an API call using axios
-    axios.post('http://127.0.0.1:8000/summarize', { text: inputText })
+    axios.post('https://9cc6-219-91-133-43.ngrok-free.app/summarize', { text: inputText })
       .then((response) => {
         console.log(response.data.summary);
         setResponse(response.data.summary);
