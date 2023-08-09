@@ -1,6 +1,6 @@
 .htaccess
 css.php
-/node_modules
+node_modules
 /build
 rpc/
 sites/site*/admin/
