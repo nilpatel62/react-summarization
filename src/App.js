@@ -9,10 +9,33 @@ const App = () => {
   const [response, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const [insights, setInsights] = useState({
+    wCount: 0,
+    sentences: 0,
+    chars: 0,
+  });
+
   const inpRef = useRef(null);
 
   const handleChange = (event) => {
+    const str = event.target.value;
     setInputText(event.target.value);
+    if (!str) {
+      setInsights({
+        wCount: 0,
+        sentences: 0,
+        chars: 0,
+      });
+      return true;
+    }
+    const sentenceCount = str?.toString().trim().split(".").length - 1;
+    const wordCount = str?.toString().trim().split(" ").length;
+    setInsights({
+      ...insights,
+      chars: str.length,
+      wCount: wordCount,
+      sentences: sentenceCount,
+    });
   };
 
   const handleSubmit = (event) => {
@@ -73,7 +96,7 @@ const App = () => {
 
   const textareaStyle = {
     padding: "15px",
-    border: "1px solid #444",
+    border: "none",
     borderRadius: "2px",
     resize: "vertical",
     height: "auto", // Set initial height to auto
@@ -90,13 +113,14 @@ const App = () => {
     justifyContent: "space-between",
     minHeight: "100vh",
     // background: "darkgrey",
-    background: `url('https://images.unsplash.com/photo-1676298355551-c0008749c420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2832&q=80')`,
+    background: `url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80')`,
   };
 
   const formStyle = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    position: "relative",
   };
 
   const buttonStyle = {
@@ -180,6 +204,29 @@ const App = () => {
                   outline: "none",
                 }}
               />
+              <Box
+                bg="#a934d4"
+                position="absolute"
+                bottom="53px"
+                width="calc(100% - 25px)"
+                left="0px"
+                height="46px"
+                display="flex"
+                alignItems="center"
+                padding="0px 17px"
+                color="#fff"
+                justifyContent="space-around"
+              >
+                <p>
+                  Words: <b>{insights?.wCount}</b>
+                </p>
+                <p>
+                  Sentences: <b>{insights?.sentences}</b>
+                </p>
+                <p>
+                  Character: <b>{insights?.chars}</b>
+                </p>
+              </Box>
               <button
                 type="submit"
                 style={buttonStyle}
