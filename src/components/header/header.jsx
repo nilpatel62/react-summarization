@@ -1,16 +1,16 @@
 "use client";
 
-import { Box, Flex, Container, useColorModeValue } from "@chakra-ui/react";
+import { Box, Flex, Container, Text } from "@chakra-ui/react";
 import "./header.css";
 
 export default function Header() {
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box bg={"transparent"} px={4}>
         <Container maxW="88vw">
           <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
             <Box fontWeight={700} className={"brand"}>
-              Summarization 🤗
+              <Text as="p">Summarization</Text> <Text as="span">🤗</Text>
             </Box>
 
             <Flex alignItems={"center"}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Box, Container, Textarea, Text } from "@chakra-ui/react";
+import { Box, Container, Textarea, Text, Button } from "@chakra-ui/react";
 import axios from "axios";
 import Typewriter from "typewriter-effect/dist/core";
 import Header from "./components/header/header";
@@ -98,11 +98,13 @@ const App = () => {
     padding: "15px",
     border: "none",
     borderRadius: "2px",
-    resize: "vertical",
     height: "auto", // Set initial height to auto
     minHeight: "80px", // Set minimum height
     fontSize: "20px",
-    fontWeight: 600,
+    fontWeight: 500,
+    background: "#16151e",
+    color: "#eae0ff",
+    resize: "none",
   };
 
   const containerStyle = {
@@ -113,7 +115,7 @@ const App = () => {
     justifyContent: "space-between",
     minHeight: "100vh",
     // background: "darkgrey",
-    background: `url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80')`,
+    // background: `url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80')`,
   };
 
   const formStyle = {
@@ -125,19 +127,17 @@ const App = () => {
 
   const buttonStyle = {
     padding: "12px 10px",
-    borderRadius: "2px",
+    borderRadius: "1px",
     fontSize: "18px",
-    backgroundColor: "white",
-    border: "1px solid #444",
+    border: "1px solid #fff169cf",
     // boxShadow:
     //   "0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-    width: "calc(100% - 25px)",
     cursor: "pointer",
-    background: "#222",
-    color: "#fff",
+    color: "#000",
     marginRight: "auto",
     fontWeight: 700,
-    // marginTop: "20px"
+    height: "42px",
+    marginTop: "46px",
   };
 
   const divStyle = {
@@ -182,58 +182,66 @@ const App = () => {
               summary of the text.
             </p>
           </div>
-          <div style={divStyle}>
+          <Box display="flex" flexDir={["column", "row"]}>
             <form onSubmit={handleSubmit} style={formStyle}>
-              <Textarea
-                value={inputText}
-                onChange={handleChange}
-                // placeholder="Enter your text or paste here"
-                ref={inpRef}
-                // rows={20}
-                // cols={40}
-                height="360px"
-                bg="#fff"
-                style={{
-                  ...textareaStyle,
-                  height: "360px",
-                  width: "400px",
-                  marginRight: "25px",
-                }}
-                _focusVisible={{
-                  border: "none",
-                  outline: "none",
-                }}
-              />
-              <Box
-                bg="#a934d4"
-                position="absolute"
-                bottom="53px"
-                width="calc(100% - 25px)"
-                left="0px"
-                height="46px"
-                display="flex"
-                alignItems="center"
-                padding="0px 17px"
-                color="#fff"
-                justifyContent="space-around"
-              >
-                <p>
-                  Words: <b>{insights?.wCount}</b>
-                </p>
-                <p>
-                  Sentences: <b>{insights?.sentences}</b>
-                </p>
-                <p>
-                  Character: <b>{insights?.chars}</b>
-                </p>
+              <Box position="relative">
+                <Textarea
+                  value={inputText}
+                  onChange={handleChange}
+                  // placeholder="Enter your text or paste here"
+                  ref={inpRef}
+                  // rows={20}
+                  // cols={40}
+                  height="360px"
+                  bg="#fff"
+                  width={["80vw", "400px"]}
+                  mr={["0px", "25px"]}
+                  style={{
+                    ...textareaStyle,
+                    height: "328px",
+                  }}
+                  _focusVisible={{
+                    border: "none",
+                    outline: "none",
+                  }}
+                />
+                <Box
+                  bg="#7e3998"
+                  position="absolute"
+                  bottom="-46px"
+                  width={["100%", "calc(100% - 25px)"]}
+                  left="0px"
+                  height="46px"
+                  display="flex"
+                  alignItems="center"
+                  padding="0px 17px"
+                  color="#fff"
+                  justifyContent="space-around"
+                >
+                  <p>
+                    <b>{insights?.wCount}</b> Words
+                  </p>
+                  <p>
+                    <b>{insights?.sentences}</b> Sentences
+                  </p>
+                  <p>
+                    <b>{insights?.chars}</b> Characters
+                  </p>
+                </Box>
               </Box>
-              <button
+              <Button
                 type="submit"
                 style={buttonStyle}
+                width={["100%", "calc(100% - 25px)"]}
                 className={isLoading ? "button loading" : "button"}
+                transition="0.3s"
+                bg="#fff169"
+                _hover={{
+                  background: "#eeda13",
+                }}
               >
                 {isLoading ? "Loading..." : "Summarize"}
-              </button>
+              </Button>
             </form>
 
             <Textarea
@@ -242,6 +250,7 @@ const App = () => {
               outline-style="solid"
               placeholder={`Once clicked on "Summarize" button, it will generate Summary response here. Go ahead and try now!`}
               bg="#fff"
+              mt={["30px", "0px"]}
               style={{ ...textareaStyle, height: "360px" }}
               onChange={() => {}}
               _focusVisible={{
@@ -249,11 +258,11 @@ const App = () => {
                 outline: "none",
               }}
             />
-          </div>
+          </Box>
         </Box>
         <div style={{ ...pStyle, marginBottom: "0px" }}>
           <br />
-          <Text fontWeight={700}>
+          <Text fontWeight={600}>
             Our summarization tool not only saves you time but also enhances
             your productivity by providing an efficient way to digest large
             amounts of information. Try it now and experience the power of

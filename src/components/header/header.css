@@ -1,4 +1,16 @@
 .brand {
   font-family: "Dancing Script", cursive;
   font-size: 26px;
+  display: flex;
+  align-items: center;
+}
+
+.brand p {
+  background: -webkit-linear-gradient(45deg, #f23de9, #4d4dfe 65%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  margin-right: 10px;
+  font-family: "Dancing Script", cursive !important;
+
 }
