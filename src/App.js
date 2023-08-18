@@ -130,9 +130,6 @@ const App = () => {
     borderRadius: "1px",
     fontSize: "18px",
     border: "1px solid #fff169cf",
-    // boxShadow:
-    //   "0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-    cursor: "pointer",
     color: "#000",
     marginRight: "auto",
     fontWeight: 700,
@@ -140,13 +137,6 @@ const App = () => {
     marginTop: "46px",
   };
 
-  const divStyle = {
-    // margin: "50px",
-    display: "flex",
-    // flexDirection: "column",
-    // alignItems: "center",
-    // justifyContent: "center",
-  };
 
   const pStyle = {
     paddingTop: "20px",
@@ -231,6 +221,8 @@ const App = () => {
               </Box>
               <Button
                 type="submit"
+                isLoading={isLoading}
+                isDisabled={isLoading}
                 style={buttonStyle}
                 width={["100%", "calc(100% - 25px)"]}
                 className={isLoading ? "button loading" : "button"}
@@ -240,7 +232,7 @@ const App = () => {
                   background: "#eeda13",
                 }}
               >
-                {isLoading ? "Loading..." : "Summarize"}
+                Summarize
               </Button>
             </form>
 
